@@ -11,42 +11,22 @@
   </head>
 
   <body>
-    <!-- 1. Load the webchat.js bundle via a script tag -->
-    <script src="https://github.com/Cognigy/WebchatWidget/releases/download/v2.25.1/webchat.js"></script>
-    <script src="https://github.com/Cognigy/WebchatPlugins/releases/download/multiselect100/multiselect.webchat-plugin.js"></script>
-
-    <!-- Load additional CSS customization for the webchat -->
-    <link rel="stylesheet" href="./webchat-style.css" />
-
-    <!-- Initialize the Webchat towards a Cogngiy Endpoint via initWebchat() -->
+    <div id="teneo-web-chat"></div>
+    <script src="./teneo-web-chat.js"></script>
     <script>
-      initWebchat(
-        "https://endpoint-app.cognigy.ai/2e85d01dad6556857d8c45f92f3403a3f46e8a3780b620d67d9e5e1532db49ca",
-        {
-          settings: {
-            //engagementMessageText: "Hey, may I help you?",
-            //engagementMessageDelay: 2000,
-            //enableUnreadMessagePreview: true,
-            //enableUnreadMessageBadge: true,
-            //enableUnreadMessageTitleIndicator: true,
-            //enableUnreadMessageSound: true
-            getStartedText: "Hallo",
-            getStartedPayload: "1000000100",
-            getStartedButtonText: "Klick hier zur Terminbuchung!"
-          }
+      window.onload = function () {
+        if (
+          window.TeneoWebChat &&
+          typeof window.TeneoWebChat.initialize === "function"
+        ) {
+          var element = document.getElementById("teneo-web-chat");
+          const teneoProps = {
+            teneoEngineUrl:
+              "https://gleamingferrets-a59a0d.bots.teneo.ai/myfirstteneosoluti_1z7s00zjt18qws7j6azewxy65p"
+          };
+          window.TeneoWebChat.initialize(element, teneoProps);
         }
-      ).then((webchat) => {
-        // use the webchat
-        window.webchat = webchat;
-        //webchat.registerAnalyticsService((event) => {
-        //if (event.type === "webchat/open") {
-        // webchat.sendMessage("", {
-        //   dealerid: "1000000100"
-        // });
-        // }
-        //});
-        webchat.open();
-      });
+      };
     </script>
   </body>
 </html>
